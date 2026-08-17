@@ -1,0 +1,60 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "style_preferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "minimalist",
+          "bohemian",
+          "classic",
+          "edgy",
+          "romantic",
+          "sporty",
+          "trendy",
+          "vintage"
+        ]
+      },
+      "description": "User's style preferences"
+    },
+    "preferred_colors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Preferred color palette"
+    },
+    "preferred_brands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Favorite brands"
+    },
+    "body_type": {
+      "type": "string",
+      "enum": [
+        "pear",
+        "apple",
+        "hourglass",
+        "rectangle",
+        "inverted_triangle",
+        "prefer_not_to_say"
+      ],
+      "description": "Body type for better fit recommendations"
+    },
+    "location": {
+      "type": "string",
+      "description": "City/location for weather-based recommendations"
+    }
+  },
+  "required": [
+    "style_preferences",
+    "preferred_colors",
+    "preferred_brands",
+    "body_type",
+    "location"
+  ]
+}

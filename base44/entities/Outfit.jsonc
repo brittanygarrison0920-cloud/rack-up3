@@ -1,0 +1,100 @@
+{
+  "name": "Outfit",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the outfit"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of ClosetItem IDs in this outfit"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Screenshot or photo of the outfit combination"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about the outfit"
+    },
+    "occasion": {
+      "type": "string",
+      "description": "Occasion type (casual, formal, work, etc.)"
+    },
+    "planned_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this outfit is planned to be worn"
+    },
+    "worn_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this outfit was actually worn"
+    },
+    "is_favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this outfit is marked as a favorite"
+    }
+  },
+  "required": [
+    "name",
+    "items"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

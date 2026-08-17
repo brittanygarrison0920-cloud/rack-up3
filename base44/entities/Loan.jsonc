@@ -1,0 +1,117 @@
+{
+  "name": "Loan",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "description": "ID of the loaned ClosetItem"
+    },
+    "friend_name": {
+      "type": "string",
+      "description": "Name of the friend borrowing the item"
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "Phone number of the friend borrowing the item"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for borrowing the item"
+    },
+    "loan_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the item was loaned"
+    },
+    "expected_return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Expected return date"
+    },
+    "return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Actual return date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the loan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "loaned",
+        "returned"
+      ],
+      "default": "loaned",
+      "description": "Current loan status"
+    },
+    "reminder_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a reminder has been sent for this loan"
+    },
+    "sync_to_calendar": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show the expected return date on the outfit calendar as a follow-up reminder"
+    }
+  },
+  "required": [
+    "item_id",
+    "friend_name",
+    "loan_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "name": "AccessoryLibrary",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the accessory"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the accessory"
+    },
+    "category": {
+      "type": "string",
+      "description": "Accessory category (necklace, earrings, belt, bag, etc.)"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "closet",
+        "web"
+      ],
+      "description": "Whether from user's closet or web recommendation"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Photo URL of the accessory"
+    },
+    "purchase_url": {
+      "type": "string",
+      "description": "Purchase link for web accessories"
+    },
+    "price": {
+      "type": "string",
+      "description": "Approximate price for web accessories"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand name"
+    },
+    "outfit_photo_url": {
+      "type": "string",
+      "description": "The outfit photo this was saved with"
+    },
+    "occasion": {
+      "type": "string",
+      "description": "Occasion this was styled for"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Styling notes"
+    },
+    "closet_item_id": {
+      "type": "string",
+      "description": "ID of the closet item if source is closet"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "source"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

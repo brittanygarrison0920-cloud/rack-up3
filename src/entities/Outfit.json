@@ -1,0 +1,33 @@
+{
+  "name": "Outfit",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the outfit"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of ClosetItem IDs in this outfit"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Screenshot or photo of the outfit combination"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about the outfit"
+    },
+    "occasion": {
+      "type": "string",
+      "description": "Occasion type (casual, formal, work, etc.)"
+    }
+  },
+  "required": [
+    "name",
+    "items"
+  ]
+}

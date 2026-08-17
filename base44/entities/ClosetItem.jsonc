@@ -1,0 +1,125 @@
+{
+  "name": "ClosetItem",
+  "type": "object",
+  "properties": {
+    "item_number": {
+      "type": "string",
+      "description": "Unique item number for physical organization"
+    },
+    "qr_code": {
+      "type": "string",
+      "description": "QR code data for scanning"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "URL of the item photo"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the item"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "tops",
+        "bottoms",
+        "dresses",
+        "outerwear",
+        "shoes",
+        "accessories",
+        "bags"
+      ],
+      "description": "Item category"
+    },
+    "color": {
+      "type": "string",
+      "description": "Primary color of the item"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand name"
+    },
+    "season": {
+      "type": "string",
+      "enum": [
+        "spring",
+        "summer",
+        "fall",
+        "winter",
+        "all_season"
+      ],
+      "default": "all_season",
+      "description": "Best season for this item"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the item"
+    },
+    "storage_location": {
+      "type": "string",
+      "description": "Physical storage location"
+    },
+    "is_favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this item is marked as a favorite"
+    }
+  },
+  "required": [
+    "photo_url",
+    "name",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Loan",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "description": "ID of the loaned ClosetItem"
+    },
+    "friend_name": {
+      "type": "string",
+      "description": "Name of the friend borrowing the item"
+    },
+    "loan_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the item was loaned"
+    },
+    "expected_return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Expected return date"
+    },
+    "return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Actual return date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the loan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "loaned",
+        "returned"
+      ],
+      "default": "loaned",
+      "description": "Current loan status"
+    }
+  },
+  "required": [
+    "item_id",
+    "friend_name",
+    "loan_date"
+  ]
+}
